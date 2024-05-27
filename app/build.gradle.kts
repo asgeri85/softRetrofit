@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     id("androidx.navigation.safeargs.kotlin")
+    id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -66,6 +68,9 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version")
+
+    implementation("com.google.dagger:hilt-android:2.48")
+    kapt("com.google.dagger:hilt-android-compiler:2.47")
 
 
 }

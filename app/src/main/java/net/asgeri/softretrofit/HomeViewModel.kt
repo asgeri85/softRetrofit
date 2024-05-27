@@ -3,21 +3,23 @@ package net.asgeri.softretrofit
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class HomeViewModel : ViewModel() {
-
-    val repo = TodoRepository()
+@HiltViewModel
+class HomeViewModel @Inject constructor(
+    private val repo: TodoRepository
+) : ViewModel() {
 
     val todos = MutableLiveData<List<Todo>>()
     val error = MutableLiveData<String?>()
     val loading = MutableLiveData<Boolean>()
-    var job: Job? = null
 
-     fun getData() {
+    fun getData() {
         loading.value = true
         viewModelScope.launch(Dispatchers.IO) {
             try {
